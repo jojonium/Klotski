@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="/usr/lib/eclipse/plugins/org.eclipse.osgi_3.12.50.v20171217-1438.jar" sourcepath="/usr/share/eclipse/droplets/eclipse-sdk/eclipse/plugins/org.eclipse.osgi.source_3.12.50.v20171217-1438.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/eclipse/plugins/org.eclipse.core.commands_3.9.0.v20171217-1438.jar" sourcepath="/usr/share/eclipse/droplets/eclipse-sdk/eclipse/plugins/org.eclipse.core.commands.source_3.9.0.v20171217-1438.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/eclipse/plugins/org.eclipse.equinox.common_3.9.0.v20171217-1438.jar" sourcepath="/usr/share/eclipse/droplets/eclipse-sdk/eclipse/plugins/org.eclipse.equinox.common.source_3.9.0.v20171217-1438.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/eclipse/plugins/org.eclipse.equinox.registry_3.7.0.v20171217-1438.jar" sourcepath="/usr/share/eclipse/droplets/eclipse-sdk/eclipse/plugins/org.eclipse.equinox.registry.source_3.7.0.v20171217-1438.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/eclipse/plugins/org.eclipse.core.runtime_3.13.0.v20171217-1438.jar" sourcepath="/usr/share/eclipse/droplets/eclipse-sdk/eclipse/plugins/org.eclipse.core.runtime.source_3.13.0.v20171217-1438.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/eclipse/plugins/org.eclipse.text_3.6.100.v20171217-1438.jar" sourcepath="/usr/share/eclipse/droplets/eclipse-sdk/eclipse/plugins/org.eclipse.text.source_3.6.100.v20171217-1438.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/eclipse/plugins/org.eclipse.jface_3.13.2.v20171217-1438.jar" sourcepath="/usr/share/eclipse/droplets/eclipse-sdk/eclipse/plugins/org.eclipse.jface.source_3.13.2.v20171217-1438.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/eclipse/plugins/org.eclipse.jface.text_3.12.1.v20171217-1438.jar" sourcepath="/usr/share/eclipse/droplets/eclipse-sdk/eclipse/plugins/org.eclipse.jface.text.source_3.12.1.v20171217-1438.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/eclipse/plugins/org.eclipse.ui.workbench_3.110.1.v20171217-1438.jar" sourcepath="/usr/share/eclipse/droplets/eclipse-sdk/eclipse/plugins/org.eclipse.ui.workbench.source_3.110.1.v20171217-1438.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/eclipse/plugins/com.ibm.icu_59.1.0.jar" sourcepath="/usr/lib/eclipse/plugins/com.ibm.icu_59.1.0.jar"/>
+	<classpathentry kind="lib" path="/usr/lib/eclipse/plugins/org.eclipse.ui.forms_3.7.101.v20171217-1438.jar" sourcepath="/usr/share/eclipse/droplets/eclipse-sdk/eclipse/plugins/org.eclipse.ui.forms.source_3.7.101.v20171217-1438.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
