@@ -43,7 +43,7 @@ public class PuzzleView extends JPanel {
 	@Override
 	public Dimension getPreferredSize() {
 		int width = squareSize * board.getWidth();
-		int height = squareSize * board.getHeight();
+		int height = squareSize * board.getHeight() + 6;
 		
 		return new Dimension(width, height);
 	}
@@ -79,7 +79,7 @@ public class PuzzleView extends JPanel {
 		
 		// draw background
 		Dimension s1 = getPreferredSize();
-		offScreenGraphics.setColor(Color.lightGray);
+		offScreenGraphics.setColor(Color.decode("#dddddd"));
 		offScreenGraphics.fillRect(0, 0, s1.width, s1.height);
 		
 		// draw all pieces
@@ -88,16 +88,26 @@ public class PuzzleView extends JPanel {
 		for (int i = 0; i < p.length; ++i) {
 			currentDims = p[i].getDims();
 			if (p[i] == board.getSelectedPiece())
-				offScreenGraphics.setColor(Color.blue);
+				offScreenGraphics.setColor(Color.decode("#008cff")); // blue
 			else if (i == 0)
-				offScreenGraphics.setColor(Color.red); // color big piece red
+				offScreenGraphics.setColor(Color.decode("#e06d78")); // red
 			else
-				offScreenGraphics.setColor(Color.green);
+				offScreenGraphics.setColor(Color.decode("#fffee7"));
 			offScreenGraphics.fillRect(currentDims[0] * squareSize + spacing,
 					currentDims[1] * squareSize + spacing,
 					currentDims[2] * squareSize - spacing * 2,
 					currentDims[3] * squareSize - spacing * 2);
+			offScreenGraphics.setColor(Color.decode("#222222"));
+			offScreenGraphics.drawRect(currentDims[0] * squareSize + spacing,
+					currentDims[1] * squareSize + spacing,
+					currentDims[2] * squareSize - spacing * 2,
+					currentDims[3] * squareSize - spacing * 2);
 		}
+		
+		// draw red line at bottom to show exit slot
+		offScreenGraphics.setColor(Color.decode("#e06d78"));
+		offScreenGraphics.fillRect(squareSize, squareSize * board.getHeight(),
+				squareSize * 2, 6);
 		
 		// congratulate the player if he/she has won
 		if (board.checkWin()) {
