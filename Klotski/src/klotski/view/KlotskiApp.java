@@ -39,6 +39,8 @@ public class KlotskiApp extends JFrame {
 	public KlotskiApp(Board b) {
 		this.board = b;
 		setTitle("Klotski");
+		setFocusable(true);
+		requestFocus();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 650, 600);
 		contentPane = new JPanel();
@@ -50,12 +52,11 @@ public class KlotskiApp extends JFrame {
 		puzzleView.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				puzzleView.requestFocus();
+				KlotskiApp.this.requestFocus();
 				new SelectPieceController(KlotskiApp.this, board).select(e);
 			}
 		});
-		puzzleView.setFocusable(true);
-		puzzleView.addKeyListener(new KeyListener() {
+		this.addKeyListener(new KeyListener() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				int kc = e.getKeyCode();
@@ -99,6 +100,7 @@ public class KlotskiApp extends JFrame {
 		btnReset.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				KlotskiApp.this.requestFocus();
 				new ResetPuzzleController(KlotskiApp.this, board).reset();
 			}
 		});
@@ -109,6 +111,7 @@ public class KlotskiApp extends JFrame {
 		btnQuit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				KlotskiApp.this.requestFocus();
 				new QuitController(KlotskiApp.this).quit();
 			}
 		});
@@ -119,6 +122,7 @@ public class KlotskiApp extends JFrame {
 		btnUp.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				KlotskiApp.this.requestFocus();
 				new MovePieceController(KlotskiApp.this, board).move(0);
 			}
 		});
@@ -129,6 +133,7 @@ public class KlotskiApp extends JFrame {
 		btnRight.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				KlotskiApp.this.requestFocus();
 				new MovePieceController(KlotskiApp.this, board).move(1);
 			}
 		});
@@ -139,6 +144,7 @@ public class KlotskiApp extends JFrame {
 		btnLeft.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				KlotskiApp.this.requestFocus();
 				new MovePieceController(KlotskiApp.this, board).move(3);
 			}
 		});
@@ -149,6 +155,7 @@ public class KlotskiApp extends JFrame {
 		btnDown.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				KlotskiApp.this.requestFocus();
 				new MovePieceController(KlotskiApp.this, board).move(2);
 			}
 		});
