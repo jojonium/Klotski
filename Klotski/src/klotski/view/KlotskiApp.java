@@ -100,10 +100,10 @@ public class KlotskiApp extends JFrame {
 		btnReset.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				KlotskiApp.this.requestFocus();
 				new ResetPuzzleController(KlotskiApp.this, board).reset();
 			}
 		});
+		btnReset.setFocusable(false);
 		btnReset.setBounds(525, 25, 100, 25);
 		contentPane.add(btnReset);
 		
@@ -111,10 +111,10 @@ public class KlotskiApp extends JFrame {
 		btnQuit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				KlotskiApp.this.requestFocus();
 				new QuitController(KlotskiApp.this).quit();
 			}
 		});
+		btnQuit.setFocusable(false);
 		btnQuit.setBounds(525, 525, 100, 25);
 		contentPane.add(btnQuit);
 		
@@ -122,10 +122,10 @@ public class KlotskiApp extends JFrame {
 		btnUp.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				KlotskiApp.this.requestFocus();
 				new MovePieceController(KlotskiApp.this, board).move(0);
 			}
 		});
+		btnUp.setFocusable(false);
 		btnUp.setBounds(525, 150, 50, 25);
 		contentPane.add(btnUp);
 		
@@ -133,10 +133,10 @@ public class KlotskiApp extends JFrame {
 		btnRight.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				KlotskiApp.this.requestFocus();
 				new MovePieceController(KlotskiApp.this, board).move(1);
 			}
 		});
+		btnRight.setFocusable(false);
 		btnRight.setBounds(575, 200, 50, 25);
 		contentPane.add(btnRight);
 		
@@ -144,10 +144,10 @@ public class KlotskiApp extends JFrame {
 		btnLeft.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				KlotskiApp.this.requestFocus();
 				new MovePieceController(KlotskiApp.this, board).move(3);
 			}
 		});
+		btnLeft.setFocusable(false);
 		btnLeft.setBounds(475, 200, 50, 25);
 		contentPane.add(btnLeft);
 		
@@ -155,10 +155,10 @@ public class KlotskiApp extends JFrame {
 		btnDown.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				KlotskiApp.this.requestFocus();
 				new MovePieceController(KlotskiApp.this, board).move(2);
 			}
 		});
+		btnDown.setFocusable(false);
 		btnDown.setBounds(525, 250, 50, 25);
 		contentPane.add(btnDown);
 		
