@@ -1,0 +1,112 @@
+package klotski.view;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+
+import javax.swing.JPanel;
+
+import klotski.model.Board;
+import klotski.model.Piece;
+
+public class PuzzleView extends JPanel {
+	private static final long serialVersionUID = 3251334679791843551L;
+
+	Board board;
+	
+	/** Off-screen image for drawing (and Graphics object) */
+	Image offScreenImage = null;
+	Graphics offScreenGraphics = null;
+	
+	/** space between pieces and at edges */
+	final int spacing = 5;
+	
+	/** size of a single square on the board */
+	final int squareSize = 100;
+	
+	/** squareSize getter */
+	public int getSquareSize() { return squareSize; }
+	
+	/**
+	 * Basic constructor
+	 * @param b the model Board
+	 */
+	public PuzzleView(Board b) {
+		this.board = b;
+	}
+	
+	/**
+	 * Set the size depending on the height and width of the puzzl
+	 */
+	@Override
+	public Dimension getPreferredSize() {
+		int width = squareSize * board.getWidth();
+		int height = squareSize * board.getHeight();
+		
+		return new Dimension(width, height);
+	}
+	
+	/**
+	 * Draws the background and all pieces
+	 */
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+				
+		if (offScreenImage == null) {
+			Dimension s = getPreferredSize();
+			offScreenImage = this.createImage(s.width, s.height);
+			if (offScreenImage == null) { return; }
+			
+			offScreenGraphics = offScreenImage.getGraphics();
+			redraw();
+		}
+		
+		// copy image into place
+		g.drawImage(offScreenImage, 0, 0, this);
+		
+	}
+	
+	/**
+	 * draws background and then all pieces on top of it
+	 */
+	public void redraw() {
+		if (offScreenImage == null) { return; }
+		
+		Dimension s = getPreferredSize();
+		offScreenGraphics.clearRect(0, 0, s.width, s.height);
+		
+		// draw background
+		Dimension s1 = getPreferredSize();
+		offScreenGraphics.setColor(Color.lightGray);
+		offScreenGraphics.fillRect(0, 0, s1.width, s1.height);
+		
+		// draw all pieces
+		Piece[] p = board.getPieces();
+		int[] currentDims;
+		for (int i = 0; i < p.length; ++i) {
+			currentDims = p[i].getDims();
+			if (p[i] == board.getSelectedPiece())
+				offScreenGraphics.setColor(Color.blue);
+			else if (i == 0)
+				offScreenGraphics.setColor(Color.red); // color special piece red
+			else
+				offScreenGraphics.setColor(Color.green);
+			offScreenGraphics.fillRect(currentDims[0] * squareSize + spacing,
+					currentDims[1] * squareSize + spacing,
+					currentDims[2] * squareSize - spacing * 2,
+					currentDims[3] * squareSize - spacing * 2);
+		}
+	}
+	
+	/**
+	 * redraws the whole PuzzleView when pieces are changed
+	 */
+	public void refresh() {
+		if (offScreenImage == null) { return; }
+		offScreenGraphics.clearRect(0, 0, offScreenImage.getWidth(this),
+				offScreenImage.getHeight(this));
+		redraw();
+		repaint();
+	}
+}

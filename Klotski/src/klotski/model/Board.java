@@ -1,5 +1,7 @@
 package klotski.model;
 
+import java.awt.Point;
+
 /**
  * Represents the entire game board, containing several pieces
  * @author Joseph Petitti
@@ -13,16 +15,54 @@ public class Board {
 	int moves; // number of moves the player has made
 	
 	/**
-	 * Basic constructor. Initializes height and width to standard klotski size
-	 * @param pieces an array of the pieces in the board
+	 * Basic constructor. Initializes height and width to standard klotski size.
+	 * Initializes pieces to configuration 1
 	 */
-	public Board(Piece[] pieces) {
-		this.pieces = pieces;
+	public Board() {
+		// make the pieces for configuration 1
+		Piece[] config1 = new Piece[10];
+		config1[0] = new Piece(new Point[] {new Point(1, 0), new Point(2, 0),
+				new Point(1, 1), new Point(2, 1)});
+		config1[1] = new Piece(new Point[] {new Point(0, 0), new Point(0, 1)});
+		config1[2] = new Piece(new Point[] {new Point(3, 0), new Point(3, 1)});
+		config1[3] = new Piece(new Point[] {new Point(0, 2), new Point(0, 3)});
+		config1[4] = new Piece(new Point[] {new Point(1, 2)});
+		config1[5] = new Piece(new Point[] {new Point(2, 2)});
+		config1[6] = new Piece(new Point[] {new Point(3, 2), new Point(3, 3)});
+		config1[7] = new Piece(new Point[] {new Point(1, 3)});
+		config1[8] = new Piece(new Point[] {new Point(2, 3)});
+		config1[9] = new Piece(new Point[] {new Point(1, 4), new Point(2, 4)});
+
+		this.pieces = config1;
 		this.selectedPiece = null;
 		this.height = 5;
 		this.width = 4;
 		this.moves = 0;
 	}
+	
+	/**
+	 * selectedPiece getter
+	 * @return this board's selectedPiece
+	 */
+	public Piece getSelectedPiece() { return selectedPiece; }
+	
+	/**
+	 * width getter
+	 * @return this board's width
+	 */
+	public int getWidth() { return width; }
+	
+	/**
+	 * height getter
+	 * @return this board's height
+	 */
+	public int getHeight() { return height; }
+	
+	/**
+	 * pieces getter
+	 * @return this board's pieces
+	 */
+	public Piece[] getPieces() { return pieces; }
 	
 	/**
 	 * selects the piece at the given x and y coordinates
@@ -34,7 +74,7 @@ public class Board {
 		int i, j;
 		
 		for (i = 0; i < pieces.length; ++i) {
-			for (j = 0; j < pieces.length; ++j) {
+			for (j = 0; j < pieces[i].points.length; ++j) {
 				if (pieces[i].points[j].x == x && pieces[i].points[j].y == y) {
 					selectedPiece = pieces[i];
 					return true;
@@ -83,8 +123,8 @@ public class Board {
 		
 		// check for a win
 		if (selectedPiece == pieces[0] && 
-				selectedPiece.getTopLeft().x == 1 &&
-				selectedPiece.getTopLeft().y == 3 &&
+				selectedPiece.getDims()[0] == 1 &&
+				selectedPiece.getDims()[1] == 3 &&
 				direction == 2) {
 			// TODO congratulate the player
 			return true;

@@ -19,7 +19,7 @@ public class Piece {
 	public Piece(Point[] points) {
 		this.points = points;
 	}
-	
+
 	/**
 	 * moves a piece in the given direction on the board. Assumes the move is
 	 * valid.
@@ -61,42 +61,33 @@ public class Piece {
 	}
 	
 	/**
-	 * returns the point in the top-left-most point in this piece
-	 * @return the top-left-most Point
+	 * Finds the x and y coordinates of the top left point in the piece, as
+	 * well as the piece's width and height
+	 * @return an int array with the left, top, width, and height values
 	 */
-	public Point getTopLeft() {
-		int i, outx, outy;
+	public int[] getDims() {
+		int i, top, left, bottom, right, height, width;
 		
-		outx = this.points[0].x;
-		outy = this.points[0].y;
+		left = this.points[0].x;
+		top = this.points[0].y;
+		bottom = top;
+		right = left;
+		
 		
 		for (i = 0; i < points.length; ++i) {
-			if (points[i].x < outx)
-				outx = points[i].x;
-			if (points[i].y < outy)
-				outy = this.points[i].y;
+			if (points[i].x < left)
+				left = points[i].x;
+			if (points[i].x > right)
+				right = points[i].x;
+			if (points[i].y < top)
+				top = points[i].y;
+			if (points[i].y > bottom)
+				bottom = points[i].y;
 		}
 		
-		return new Point(outx, outy);
-	}
-	
-	/**
-	 * returns the point in the bottom-right-most point in this piece
-	 * @return the bottom-right-most Point
-	 */
-	public Point getBottomRight() {
-		int i, outx, outy;
+		height = bottom - top + 1;
+		width = right - left + 1;
 		
-		outx = this.points[0].x;
-		outy = this.points[0].y;
-		
-		for (i = 0; i < points.length; ++i) {
-			if (points[i].x > outx)
-				outx = points[i].x;
-			if (points[i].y > outy)
-				outy = this.points[i].y;
-		}
-		
-		return new Point(outx, outy);
+		return new int[] {left, top, width, height};
 	}
 }
