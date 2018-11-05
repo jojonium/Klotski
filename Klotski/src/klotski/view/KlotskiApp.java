@@ -56,14 +56,13 @@ public class KlotskiApp extends JFrame {
 		puzzleView = new PuzzleView(board);
 		puzzleView.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mousePressed(MouseEvent e) {
 				puzzleView.requestFocus();
 				new SelectPieceController(KlotskiApp.this, board).select(e);
 			}
 		});
 		puzzleView.setFocusable(true);
 		puzzleView.addKeyListener(new KeyListener() {
-
 			@Override
 			public void keyPressed(KeyEvent e) {
 				int kc = e.getKeyCode();
