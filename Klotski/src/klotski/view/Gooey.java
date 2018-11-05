@@ -9,6 +9,10 @@ import javax.swing.border.EmptyBorder;
 
 public class Gooey extends JFrame {
 
+	/**
+	 * Necessary to suppress an Eclipse warning
+	 */
+	private static final long serialVersionUID = 5052390254637954176L;
 	private JPanel contentPane;
 
 	/**
