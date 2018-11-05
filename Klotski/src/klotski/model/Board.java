@@ -20,7 +20,7 @@ public class Board {
 	 * Initializes pieces to configuration 1
 	 */
 	public Board() {
-		this.pieces = new Piece[5];
+		this.pieces = new Piece[10];
 		
 		// initialize all pieces to configuration 1, set moves to 0, set
 		// selectedPiece to null, and set hasWon to false
@@ -174,12 +174,12 @@ public class Board {
 		pieces[1] = new Piece(new Point[] {new Point(0, 0), new Point(0, 1)});
 		pieces[2] = new Piece(new Point[] {new Point(3, 0), new Point(3, 1)});
 		pieces[3] = new Piece(new Point[] {new Point(0, 2), new Point(0, 3)});
-		//pieces[4] = new Piece(new Point[] {new Point(1, 2)});
-		//pieces[5] = new Piece(new Point[] {new Point(2, 2)});
-		pieces[4] = new Piece(new Point[] {new Point(3, 2), new Point(3, 3)});
-		//pieces[7] = new Piece(new Point[] {new Point(1, 3)});
-		//pieces[8] = new Piece(new Point[] {new Point(2, 3)});
-		//pieces[9] = new Piece(new Point[] {new Point(1, 4), new Point(2, 4)});
+		pieces[4] = new Piece(new Point[] {new Point(1, 2)});
+		pieces[5] = new Piece(new Point[] {new Point(2, 2)});
+		pieces[6] = new Piece(new Point[] {new Point(3, 2), new Point(3, 3)});
+		pieces[7] = new Piece(new Point[] {new Point(1, 3)});
+		pieces[8] = new Piece(new Point[] {new Point(2, 3)});
+		pieces[9] = new Piece(new Point[] {new Point(1, 4), new Point(2, 4)});
 		
 		moves = 0;
 		selectedPiece = null;

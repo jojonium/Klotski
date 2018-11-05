@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 
 import klotski.model.Board;
 import klotski.controller.MovePieceController;
+import klotski.controller.QuitController;
 import klotski.controller.ResetPuzzleController;
 import klotski.controller.SelectPieceController;
 
@@ -72,6 +73,12 @@ public class KlotskiApp extends JFrame {
 		contentPane.add(btnReset);
 		
 		JButton btnQuit = new JButton("Quit");
+		btnQuit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				new QuitController(KlotskiApp.this).quit();
+			}
+		});
 		btnQuit.setBounds(525, 525, 100, 25);
 		contentPane.add(btnQuit);
 		
