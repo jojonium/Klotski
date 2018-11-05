@@ -2,6 +2,7 @@ package klotski.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -96,6 +97,14 @@ public class PuzzleView extends JPanel {
 					currentDims[1] * squareSize + spacing,
 					currentDims[2] * squareSize - spacing * 2,
 					currentDims[3] * squareSize - spacing * 2);
+		}
+		
+		// congratulate the player if he/she has won
+		if (board.checkWin()) {
+			offScreenGraphics.setColor(Color.black);
+			offScreenGraphics.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 45));
+			offScreenGraphics.drawString("Congratulations!", 10, 72);
+			offScreenGraphics.drawString("You win!", 105, 172);
 		}
 	}
 	

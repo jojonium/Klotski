@@ -13,32 +13,34 @@ public class Board {
 	int height;
 	int width;
 	int moves; // number of moves the player has made
+	boolean hasWon;
 	
 	/**
 	 * Basic constructor. Initializes height and width to standard klotski size.
 	 * Initializes pieces to configuration 1
 	 */
 	public Board() {
-		// make the pieces for configuration 1
-		Piece[] config1 = new Piece[10];
-		config1[0] = new Piece(new Point[] {new Point(1, 0), new Point(2, 0),
-				new Point(1, 1), new Point(2, 1)});
-		config1[1] = new Piece(new Point[] {new Point(0, 0), new Point(0, 1)});
-		config1[2] = new Piece(new Point[] {new Point(3, 0), new Point(3, 1)});
-		config1[3] = new Piece(new Point[] {new Point(0, 2), new Point(0, 3)});
-		config1[4] = new Piece(new Point[] {new Point(1, 2)});
-		config1[5] = new Piece(new Point[] {new Point(2, 2)});
-		config1[6] = new Piece(new Point[] {new Point(3, 2), new Point(3, 3)});
-		config1[7] = new Piece(new Point[] {new Point(1, 3)});
-		config1[8] = new Piece(new Point[] {new Point(2, 3)});
-		config1[9] = new Piece(new Point[] {new Point(1, 4), new Point(2, 4)});
-
-		this.pieces = config1;
-		this.selectedPiece = null;
+		this.pieces = new Piece[5];
+		
+		// initialize all pieces to configuration 1, set moves to 0, set
+		// selectedPiece to null, and set hasWon to false
+		reset();
+		
 		this.height = 5;
 		this.width = 4;
-		this.moves = 0;
 	}
+	
+	/**
+	 * hasWon getter
+	 * @return whether the play has won
+	 */
+	public boolean checkWin() { return hasWon; }
+	
+	/**
+	 * move getter
+	 * @return the current number of moves
+	 */
+	public int getMoves() { return moves; }
 	
 	/**
 	 * selectedPiece getter
@@ -98,7 +100,7 @@ public class Board {
 		int i, j;
 		
 		for (i = 0; i < pieces.length; ++i) {
-			for (j = 0; j < pieces.length; ++j) {
+			for (j = 0; j < pieces[i].points.length; ++j) {
 				if (pieces[i].points[j].x == x && pieces[i].points[j].y == y) {
 					return true;
 				}
@@ -126,7 +128,7 @@ public class Board {
 				selectedPiece.getDims()[0] == 1 &&
 				selectedPiece.getDims()[1] == 3 &&
 				direction == 2) {
-			// TODO congratulate the player
+				hasWon = true;
 			return true;
 		}
 		
@@ -160,5 +162,27 @@ public class Board {
 		selectedPiece.move(direction);
 		++moves;
 		return true;
+	}
+	
+	/*
+	 * Sets all pieces to their original position, sets moves to 0, sets
+	 * selectedPiece to null, and sets hasWon to false
+	 */
+	public void reset() {
+		pieces[0] = new Piece(new Point[] {new Point(1, 0), new Point(2, 0),
+				new Point(1, 1), new Point(2, 1)});
+		pieces[1] = new Piece(new Point[] {new Point(0, 0), new Point(0, 1)});
+		pieces[2] = new Piece(new Point[] {new Point(3, 0), new Point(3, 1)});
+		pieces[3] = new Piece(new Point[] {new Point(0, 2), new Point(0, 3)});
+		//pieces[4] = new Piece(new Point[] {new Point(1, 2)});
+		//pieces[5] = new Piece(new Point[] {new Point(2, 2)});
+		pieces[4] = new Piece(new Point[] {new Point(3, 2), new Point(3, 3)});
+		//pieces[7] = new Piece(new Point[] {new Point(1, 3)});
+		//pieces[8] = new Piece(new Point[] {new Point(2, 3)});
+		//pieces[9] = new Piece(new Point[] {new Point(1, 4), new Point(2, 4)});
+		
+		moves = 0;
+		selectedPiece = null;
+		hasWon = false;
 	}
 }
