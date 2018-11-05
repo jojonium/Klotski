@@ -25,7 +25,7 @@ public class MovePieceController {
 	 */
 	public boolean move(int direction) {
 		if (b.movePiece(direction)) {
-			app.updateMoves(b.getMoves());
+			app.getMovesCounter().setText(Integer.toString(b.getMoves()));
 			app.getPuzzleView().refresh();
 			return true;
 		}

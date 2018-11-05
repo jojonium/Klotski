@@ -28,16 +28,9 @@ public class KlotskiApp extends JFrame {
 	private static final long serialVersionUID = 5052390254637954176L;
 	
 	private JPanel contentPane;
-		
-	/**
-	 * sets the move counter to the input int
-	 * @param newMoves the new number to display in the move counter
-	 */
-	public void updateMoves(int newMoves) {
-		movesCounter.setText(Integer.toString(newMoves));
-	}
-	
-	/** PuzzleView getter */
+
+	/** return actionable elements */
+	public JLabel getMovesCounter() { return movesCounter; }
 	public PuzzleView getPuzzleView() { return puzzleView; }
 
 	/**

@@ -97,6 +97,8 @@ public class PuzzleView extends JPanel {
 					currentDims[1] * squareSize + spacing,
 					currentDims[2] * squareSize - spacing * 2,
 					currentDims[3] * squareSize - spacing * 2);
+			
+			// black outline
 			offScreenGraphics.setColor(Color.decode("#222222"));
 			offScreenGraphics.drawRect(currentDims[0] * squareSize + spacing,
 					currentDims[1] * squareSize + spacing,

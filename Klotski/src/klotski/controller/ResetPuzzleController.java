@@ -23,7 +23,7 @@ public class ResetPuzzleController {
 	 */
 	public void reset() {
 		b.reset();
-		app.updateMoves(b.getMoves());
+		app.getMovesCounter().setText(Integer.toString(b.getMoves()));
 		app.getPuzzleView().refresh();
 	}
 }
