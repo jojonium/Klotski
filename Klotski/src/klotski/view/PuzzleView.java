@@ -38,7 +38,7 @@ public class PuzzleView extends JPanel {
 	}
 	
 	/**
-	 * Set the size depending on the height and width of the puzzl
+	 * Set the size depending on the height and width of the puzzle
 	 */
 	@Override
 	public Dimension getPreferredSize() {
@@ -90,7 +90,7 @@ public class PuzzleView extends JPanel {
 			if (p[i] == board.getSelectedPiece())
 				offScreenGraphics.setColor(Color.blue);
 			else if (i == 0)
-				offScreenGraphics.setColor(Color.red); // color special piece red
+				offScreenGraphics.setColor(Color.red); // color big piece red
 			else
 				offScreenGraphics.setColor(Color.green);
 			offScreenGraphics.fillRect(currentDims[0] * squareSize + spacing,
@@ -102,7 +102,7 @@ public class PuzzleView extends JPanel {
 		// congratulate the player if he/she has won
 		if (board.checkWin()) {
 			offScreenGraphics.setColor(Color.black);
-			offScreenGraphics.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 45));
+			offScreenGraphics.setFont(new Font(Font.SANS_SERIF,Font.PLAIN,45));
 			offScreenGraphics.drawString("Congratulations!", 10, 72);
 			offScreenGraphics.drawString("You win!", 105, 172);
 		}
