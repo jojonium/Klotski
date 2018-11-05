@@ -3,6 +3,8 @@ package klotski.view;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JFrame;
@@ -55,8 +57,47 @@ public class KlotskiApp extends JFrame {
 		puzzleView.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				puzzleView.requestFocus();
 				new SelectPieceController(KlotskiApp.this, board).select(e);
 			}
+		});
+		puzzleView.setFocusable(true);
+		puzzleView.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				int kc = e.getKeyCode();
+				if (kc == KeyEvent.VK_UP || kc == KeyEvent.VK_W || 
+						kc == KeyEvent.VK_K) {
+					// up
+					new MovePieceController(KlotskiApp.this, b).move(0);
+				} else if (kc == KeyEvent.VK_RIGHT || kc == KeyEvent.VK_D ||
+						kc == KeyEvent.VK_L) {
+					// right
+					new MovePieceController(KlotskiApp.this, b).move(1);
+				} else if (kc == KeyEvent.VK_DOWN || kc == KeyEvent.VK_S ||
+						kc == KeyEvent.VK_J) {
+					// down
+					new MovePieceController(KlotskiApp.this, b).move(2);
+				} else if (kc == KeyEvent.VK_LEFT || kc == KeyEvent.VK_A ||
+						kc == KeyEvent.VK_H) {
+					// left
+					new MovePieceController(KlotskiApp.this, b).move(3);
+				} else if (kc == KeyEvent.VK_R) {
+					// reset
+					new ResetPuzzleController(KlotskiApp.this, b).reset();
+				} else if (kc == KeyEvent.VK_Q) {
+					// quit
+					new QuitController(KlotskiApp.this).quit();
+				}
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {}
+
+			@Override
+			public void keyTyped(KeyEvent e) {}
+			
 		});
 		puzzleView.setBounds(12, 12, puzzleView.getPreferredSize().width,
 				puzzleView.getPreferredSize().height);
