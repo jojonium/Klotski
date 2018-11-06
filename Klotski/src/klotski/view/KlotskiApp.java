@@ -81,7 +81,9 @@ public class KlotskiApp extends JFrame {
 					new ResetPuzzleController(KlotskiApp.this, b).reset();
 				} else if (kc == KeyEvent.VK_Q) {
 					// quit
-					new QuitController(KlotskiApp.this).quit();
+					if (new QuitController().confirm(KlotskiApp.this)) {
+						KlotskiApp.this.dispose();
+					}
 				}
 			}
 
@@ -111,7 +113,9 @@ public class KlotskiApp extends JFrame {
 		btnQuit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				new QuitController(KlotskiApp.this).quit();
+				if (new QuitController().confirm(KlotskiApp.this)) {
+					KlotskiApp.this.dispose();
+				}
 			}
 		});
 		btnQuit.setFocusable(false);
