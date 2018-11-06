@@ -6,24 +6,15 @@ import klotski.view.KlotskiApp;
 
 	
 public class QuitController {
-	//final KlotskiApp app;
-
 	/**
-	 * Basic constructor
-	 * @param app the view application
-	 *
-	public QuitController(KlotskiApp app) {
-		this.app = app;
-		
-	}*/
-	
-	
-	
+	 * Asks the player to confirm quitting the app
+	 * @param app the top level application view
+	 * @return true if the player clicks yes
+	 */
 	public boolean confirm(KlotskiApp app) {
-		return JOptionPane.showConfirmDialog (app, "Are you sure you want to quit?") == JOptionPane.OK_OPTION;	
+		return JOptionPane.showOptionDialog (app, 
+				"Are you sure you want to quit?", "Klotski - Confirm Quit",
+				JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null,
+				null, null) == JOptionPane.OK_OPTION;	
 	}
-	
-	/*public void quit() {
-		app.dispose();
-	}*/
 }
