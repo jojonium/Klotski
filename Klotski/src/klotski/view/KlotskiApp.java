@@ -37,10 +37,6 @@ public class KlotskiApp extends JFrame {
 	public JLabel getMovesCounter() { return movesCounter; }
 	public PuzzleView getPuzzleView() { return puzzleView; }
 
-	public void dragControl(MouseEvent e) {
-		
-	}
-	
 	/**
 	 * Create the frame.
 	 */
