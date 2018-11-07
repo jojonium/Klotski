@@ -3,8 +3,6 @@ package klotski.view;
 import static org.junit.Assert.*;
 
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
 
 import org.junit.Test;
 
