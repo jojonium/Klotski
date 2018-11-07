@@ -40,6 +40,8 @@ public class Piece {
 		} else if (direction == 3) { // left
 			for (i = 0; i < points.length; ++i)
 				points[i].x--;
+		} else {
+			throw new IllegalArgumentException("direction must be 0..3");
 		}
 	}
 	
