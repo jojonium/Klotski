@@ -11,6 +11,9 @@ Simply run the main method in the class Main
 The goal is to release the large 2x2 tile from the board through the opening
 centered at the bottom of the board. To select a piece, click on it. Then it can
 be moved in any direction with the arroy keys, WASD, HJKL, or the arrow buttons.
+You can also move pieces by dragging them across the board with the mouse.
+
+
 Only the large 2x2 tile can leave the board, so you must plan carefully to
 complete the puzzle in the fewest moves.
 
