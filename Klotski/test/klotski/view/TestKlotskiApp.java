@@ -1,6 +1,9 @@
 package klotski.view;
 
 import static org.junit.Assert.*;
+
+import java.awt.event.KeyEvent;
+
 import org.junit.Test;
 import javax.swing.JLabel;
 
@@ -28,6 +31,28 @@ public class TestKlotskiApp {
 		Board b = new Board();
 		KlotskiApp app = new KlotskiApp(b);
 		app.setVisible(true);
+		KeyEvent keyUp = new KeyEvent(app, KeyEvent.KEY_PRESSED,
+				System.currentTimeMillis(), 0, KeyEvent.VK_UP,'Z');
+		KeyEvent keyDown = new KeyEvent(app, KeyEvent.KEY_PRESSED,
+				System.currentTimeMillis(), 0, KeyEvent.VK_DOWN,'Z');
+		KeyEvent keyLeft = new KeyEvent(app, KeyEvent.KEY_PRESSED,
+				System.currentTimeMillis(), 0, KeyEvent.VK_LEFT,'Z');
+		KeyEvent keyRight = new KeyEvent(app, KeyEvent.KEY_PRESSED,
+				System.currentTimeMillis(), 0, KeyEvent.VK_RIGHT,'Z');
+		KeyEvent keyR = new KeyEvent(app, KeyEvent.KEY_PRESSED,
+				System.currentTimeMillis(), 0, KeyEvent.VK_R,'r');
+		KeyEvent keyQ = new KeyEvent(app, KeyEvent.KEY_PRESSED,
+				System.currentTimeMillis(), 0, KeyEvent.VK_Q,'q');
+
+		b.selectPiece(1, 4);
+
+	    app.getKeyListeners()[0].keyPressed(keyUp);
+	    app.getKeyListeners()[0].keyPressed(keyDown);
+	    app.getKeyListeners()[0].keyPressed(keyLeft);
+	    app.getKeyListeners()[0].keyPressed(keyRight);
+	    app.getKeyListeners()[0].keyPressed(keyR);
+	    // commented out because it requires user input to click "yes"
+	    //app.getKeyListeners()[0].keyPressed(keyQ);
 	}
 
 }
