@@ -41,6 +41,7 @@ public class TestKlotskiApp {
 				System.currentTimeMillis(), 0, KeyEvent.VK_RIGHT,'Z');
 		KeyEvent keyR = new KeyEvent(app, KeyEvent.KEY_PRESSED,
 				System.currentTimeMillis(), 0, KeyEvent.VK_R,'r');
+		@SuppressWarnings("unused")
 		KeyEvent keyQ = new KeyEvent(app, KeyEvent.KEY_PRESSED,
 				System.currentTimeMillis(), 0, KeyEvent.VK_Q,'q');
 
