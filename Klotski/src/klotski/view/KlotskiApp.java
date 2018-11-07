@@ -7,6 +7,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JFrame;
@@ -25,6 +26,7 @@ public class KlotskiApp extends JFrame {
 	Board board;	
 	PuzzleView puzzleView;
 	JLabel movesCounter;
+	Point storedPoint;
 	
 	//Necessary to suppress an Eclipse warning
 	private static final long serialVersionUID = 5052390254637954176L;
@@ -64,7 +66,32 @@ public class KlotskiApp extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				KlotskiApp.this.requestFocus();
+				storedPoint = e.getPoint();
 				new SelectPieceController(KlotskiApp.this, board).select(e);
+			}
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				KlotskiApp.this.requestFocus();
+				Point newPoint = e.getPoint();
+				int dx = newPoint.x - storedPoint.x;
+				int dy = newPoint.y - storedPoint.y;
+				if (Math.abs(dx) > 10 || Math.abs(dy) > 10) {
+					// mouse dragged
+					if (Math.abs(dx) > Math.abs(dy)) {
+						// horizontal drag
+						if (dx > 0)
+							new MovePieceController(KlotskiApp.this, board).move(1);
+						else
+							new MovePieceController(KlotskiApp.this, board).move(3);
+					} else {
+						// vertical drag
+						if (dy > 0)
+							new MovePieceController(KlotskiApp.this, board).move(2);
+						else
+							new MovePieceController(KlotskiApp.this, board).move(0);
+					}
+				}
 			}
 		});
 		this.addKeyListener(new KeyListener() {
@@ -74,22 +101,22 @@ public class KlotskiApp extends JFrame {
 				if (kc == KeyEvent.VK_UP || kc == KeyEvent.VK_W || 
 						kc == KeyEvent.VK_K) {
 					// up
-					new MovePieceController(KlotskiApp.this, b).move(0);
+					new MovePieceController(KlotskiApp.this, board).move(0);
 				} else if (kc == KeyEvent.VK_RIGHT || kc == KeyEvent.VK_D ||
 						kc == KeyEvent.VK_L) {
 					// right
-					new MovePieceController(KlotskiApp.this, b).move(1);
+					new MovePieceController(KlotskiApp.this, board).move(1);
 				} else if (kc == KeyEvent.VK_DOWN || kc == KeyEvent.VK_S ||
 						kc == KeyEvent.VK_J) {
 					// down
-					new MovePieceController(KlotskiApp.this, b).move(2);
+					new MovePieceController(KlotskiApp.this, board).move(2);
 				} else if (kc == KeyEvent.VK_LEFT || kc == KeyEvent.VK_A ||
 						kc == KeyEvent.VK_H) {
 					// left
-					new MovePieceController(KlotskiApp.this, b).move(3);
+					new MovePieceController(KlotskiApp.this, board).move(3);
 				} else if (kc == KeyEvent.VK_R) {
 					// reset
-					new ResetPuzzleController(KlotskiApp.this, b).reset();
+					new ResetPuzzleController(KlotskiApp.this, board).reset();
 				} else if (kc == KeyEvent.VK_Q) {
 					// quit
 					if (new QuitController().confirm(KlotskiApp.this)) {
