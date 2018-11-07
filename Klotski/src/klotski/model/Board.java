@@ -31,6 +31,19 @@ public class Board {
 	}
 	
 	/**
+	 * Custom constructor that uses a custom array of pieces
+	 * @param pieces the custom array of pieces that this board holds
+	 */
+	public Board(Piece[] pieces) {
+		this.pieces = pieces;
+		this.height = 5;
+		this.width = 4;
+		this.moves = 0;
+		this.hasWon = false;
+		this.selectedPiece = null;
+	}
+	
+	/**
 	 * hasWon getter
 	 * @return whether the play has won
 	 */
