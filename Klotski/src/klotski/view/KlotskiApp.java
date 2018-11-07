@@ -2,6 +2,8 @@ package klotski.view;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -41,12 +43,21 @@ public class KlotskiApp extends JFrame {
 		setTitle("Klotski");
 		setFocusable(true);
 		requestFocus();
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 650, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent we) {
+				if (new QuitController().confirm(KlotskiApp.this)) {
+					KlotskiApp.this.dispose();
+				}
+			}
+		});
 		
 		puzzleView = new PuzzleView(board);
 		puzzleView.addMouseListener(new MouseAdapter() {
