@@ -22,6 +22,10 @@ public class SaveController {
 		this.p = p;
 	}
 	
+	/**
+	 * Saves the state of the board to a text file at the given path
+	 * @return true if successful save, false otherwise
+	 */
 	public boolean save() {
 		// Convert the string to a byte array.
 	    String s = b.toString();
