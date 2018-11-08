@@ -43,6 +43,13 @@ public class Board {
 		this.selected = null;
 	}
 	
+	/**
+	 * Reads in a set a lines representing a board state and sets the pieces of
+	 * this board to match it
+	 * @param lines a List of lines with the first being the number of moves,
+	 * and the rest representing the x, y, w, and h of pieces
+	 * @return true if able to successfully read in from file, false otherwise
+	 */
 	public boolean setPieces(List<String> lines) {
 		int i;
 		String[] tokens;
