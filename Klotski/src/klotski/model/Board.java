@@ -1,5 +1,7 @@
 package klotski.model;
 
+import java.util.List;
+
 /**
  * Represents the entire game board, containing several pieces
  * @author Joseph Petitti
@@ -39,6 +41,32 @@ public class Board {
 		this.moves = 0;
 		this.hasWon = false;
 		this.selected = null;
+	}
+	
+	/**
+	 * Reads in a set a lines representing a board state and sets the pieces of
+	 * this board to match it
+	 * @param lines a List of lines with the first being the number of moves,
+	 * and the rest representing the x, y, w, and h of pieces
+	 * @return true if able to successfully read in from file, false otherwise
+	 */
+	public boolean setPieces(List<String> lines) {
+		int i;
+		String[] tokens;
+		if (lines.size() < 1 || lines.size() > this.width * this.height) {
+			System.out.println(lines.size());
+			throw new IllegalArgumentException("Illegal list of lines");
+		}
+		this.moves = Integer.parseInt(lines.get(0).trim());
+		pieces = new Piece[lines.size() - 1];
+		for (i = 1; i < lines.size(); ++i) {
+			tokens = lines.get(i).trim().split("\\s+");
+			pieces[i - 1] = new Piece(Integer.parseInt(tokens[0]),
+					Integer.parseInt(tokens[1]),
+					Integer.parseInt(tokens[2]),
+					Integer.parseInt(tokens[3]));
+		}
+		return true;
 	}
 	
 	/**
@@ -198,5 +226,18 @@ public class Board {
 		moves = 0;
 		selected = null;
 		hasWon = false;
+	}
+	
+	/**
+	 * Converts the entire board to a string, for saving
+	 * @return the String version of this board
+	 */
+	@Override
+	public String toString() {
+		String out = Integer.toString(moves) + "\n";
+		for (Piece p : pieces) {
+			out = out.concat(p.toString() + "\n");
+		}
+		return out;
 	}
 }

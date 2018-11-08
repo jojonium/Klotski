@@ -19,6 +19,8 @@ public class Piece {
 	 * @param h the vertical height of the piece
 	 */
 	public Piece(int x, int y, int w, int h) {
+		if (x < 0 || y < 0 || w < 1 || h < 1)
+			throw new IllegalArgumentException("Piece values must be positive");
 		this.x = x;
 		this.y = y;
 		this.w = w;
@@ -61,5 +63,18 @@ public class Piece {
 	 */
 	public int[] getDims() {
 		return new int[] {this.x, this.y, this.w, this.h};
+	}
+	
+	/**
+	 * Converts this piece to a string, for saving
+	 * @return the string representation of this piece
+	 */
+	public String toString() {
+		String out = "";
+		out = out.concat(Integer.toString(x) + " ")
+				.concat(Integer.toString(y) + " ")
+				.concat(Integer.toString(w) + " ")
+				.concat(Integer.toString(h) + " ");
+		return out;
 	}
 }
