@@ -18,7 +18,7 @@ Only the large 2x2 tile can leave the board, so you must plan carefully to
 complete the puzzle in the fewest moves.
 
 To reset the board to its original state, use the "reset" button or press the R
-key. To quit the game, use the "quit button, the Q key, or simply close the
+key. To quit the game, use the "quit" button, the Q key, or simply close the
 window.
 
 I have also implemented this game in Javascript, and it can be played in a
