@@ -8,7 +8,6 @@ public class TestPiece {
 	@Test
 	public void testPiece() {
 		try {
-			new Piece(0, 0, 0, 0);
 			new Piece(0, 0, 1, 1);
 			new Piece(3, 4, 8, 5);
 		} catch (Exception e) {
