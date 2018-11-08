@@ -24,6 +24,11 @@ public class OpenController {
 		this.p = p;
 	}
 	
+	/**
+	 * Reads in a saved game state text file and replaces the current board 
+	 * with it
+	 * @return true if successful, false otherwise
+	 */
 	public boolean open() {
 		Charset charset = Charset.forName("UTF-8");
 		try {
