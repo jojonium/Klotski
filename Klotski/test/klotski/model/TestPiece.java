@@ -14,6 +14,14 @@ public class TestPiece {
 			fail(e.getMessage());
 		}
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testPieceException() {
+		new Piece(1, 1, 0, 0);
+		new Piece(-1, -5, 2, 4);
+		new Piece(1, -2, 3, 4);
+		new Piece(2, 2, 3, 0);
+	}
 
 	@Test
 	public void testMove() {
@@ -81,6 +89,12 @@ public class TestPiece {
 		assertEquals(dimensions[1], 5);
 		assertEquals(dimensions[2], 1);
 		assertEquals(dimensions[3], 2);
+	}
+	
+	@Test
+	public void testToString() {
+		Piece testPiece = new Piece(8, 5, 1, 2);
+		assertEquals("8 5 1 2", testPiece.toString());
 	}
 
 }
