@@ -199,4 +199,17 @@ public class Board {
 		selected = null;
 		hasWon = false;
 	}
+	
+	/**
+	 * Converts the entire board to a string, for saving
+	 * @return the String version of this board
+	 */
+	@Override
+	public String toString() {
+		String out = "";
+		for (Piece p : pieces) {
+			out = out.concat(p.toString() + "\n");
+		}
+		return out;
+	}
 }

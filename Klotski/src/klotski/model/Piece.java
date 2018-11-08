@@ -62,4 +62,17 @@ public class Piece {
 	public int[] getDims() {
 		return new int[] {this.x, this.y, this.w, this.h};
 	}
+	
+	/**
+	 * Converts this piece to a string, for saving
+	 * @return the string representation of this piece
+	 */
+	public String toString() {
+		String out = "";
+		out = out.concat(Integer.toString(x) + " ")
+				.concat(Integer.toString(y) + " ")
+				.concat(Integer.toString(w) + " ")
+				.concat(Integer.toString(h) + " ");
+		return out;
+	}
 }
