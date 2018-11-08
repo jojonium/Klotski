@@ -15,6 +15,9 @@ public class AboutController {
 		this.app = app;
 	}
 	
+	/**
+	 * Displays About information in a popup window
+	 */
 	public void about() {        
 		JOptionPane.showMessageDialog(app, 
 			/* Message */
