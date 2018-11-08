@@ -4,7 +4,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.nio.file.Paths;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.Point;
@@ -12,14 +14,23 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 import klotski.model.Board;
+import klotski.controller.AboutController;
+import klotski.controller.LicenseController;
 import klotski.controller.MovePieceController;
+import klotski.controller.OpenController;
 import klotski.controller.QuitController;
 import klotski.controller.ResetPuzzleController;
+import klotski.controller.SaveController;
 import klotski.controller.SelectPieceController;
 
 public class KlotskiApp extends JFrame {
@@ -51,6 +62,114 @@ public class KlotskiApp extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		JFileChooser fc = new JFileChooser();
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		
+		/********************\
+		 *   Klotski Menu   *
+		\********************/
+		
+		JMenu mnKlotski = new JMenu("Klotski");
+		menuBar.add(mnKlotski);
+		
+		JMenuItem mntmSave = new JMenuItem("Save as...");
+		mntmSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,
+				InputEvent.CTRL_MASK));
+		mnKlotski.add(mntmSave);
+		
+		mntmSave.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (fc.showSaveDialog(KlotskiApp.this) == 
+						JFileChooser.APPROVE_OPTION) {
+					String path = fc.getSelectedFile().getAbsolutePath();
+					new SaveController(board, Paths.get(path)).save();
+				}
+			}
+		});
+		
+		JMenuItem mntmOpen = new JMenuItem("Open...");
+		mntmOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, 
+				InputEvent.CTRL_MASK));
+		mnKlotski.add(mntmOpen);
+		
+		mntmOpen.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (fc.showOpenDialog(KlotskiApp.this) == 
+						JFileChooser.APPROVE_OPTION) {
+					String path = fc.getSelectedFile().getAbsolutePath();
+					new OpenController(KlotskiApp.this, board, Paths.get(path))
+					.open();
+				}
+			}
+		});
+		
+		JMenuItem mntmReset = new JMenuItem("Reset");
+		mntmReset.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R,
+				InputEvent.CTRL_MASK));
+		mnKlotski.add(mntmReset);
+		
+		mntmReset.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new ResetPuzzleController(KlotskiApp.this, board).reset();
+			}
+		});
+		
+		JMenuItem mntmQuit = new JMenuItem("Quit");
+		mntmQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, 
+				InputEvent.CTRL_MASK));
+		mnKlotski.add(mntmQuit);
+		
+		mntmQuit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (new QuitController().confirm(KlotskiApp.this)) {
+					KlotskiApp.this.dispose();
+				}
+			}
+		});
+
+		
+		/*****************\
+		 *   Help Menu   *
+		\*****************/
+		
+		JMenu mnHelp = new JMenu("Help");
+		menuBar.add(mnHelp);
+		
+		JMenuItem mntmAbout = new JMenuItem("About");
+		mntmAbout.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
+		mnHelp.add(mntmAbout);
+		
+		mntmAbout.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new AboutController(KlotskiApp.this).about();
+			}
+		});
+		
+		JMenuItem mntmLicense = new JMenuItem("License");
+		mntmLicense.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0));
+		mnHelp.add(mntmLicense);
+		
+		mntmLicense.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new LicenseController(KlotskiApp.this).show();
+			}
+		});
+
+		
+		
+		/*******************\
+		 *   Puzzle View   *
+		\*******************/
 		
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -120,14 +239,6 @@ public class KlotskiApp extends JFrame {
 						kc == KeyEvent.VK_H) {
 					// left
 					new MovePieceController(KlotskiApp.this, board).move(3);
-				} else if (kc == KeyEvent.VK_R) {
-					// reset
-					new ResetPuzzleController(KlotskiApp.this, board).reset();
-				} else if (kc == KeyEvent.VK_Q) {
-					// quit
-					if (new QuitController().confirm(KlotskiApp.this)) {
-						KlotskiApp.this.dispose();
-					}
 				}
 			}
 
@@ -163,7 +274,7 @@ public class KlotskiApp extends JFrame {
 			}
 		});
 		btnQuit.setFocusable(false);
-		btnQuit.setBounds(525, 525, 100, 25);
+		btnQuit.setBounds(525, 500, 100, 25);
 		contentPane.add(btnQuit);
 		
 		JButton btnUp = new JButton("↑");
