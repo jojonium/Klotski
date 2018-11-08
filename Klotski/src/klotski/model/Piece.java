@@ -1,23 +1,28 @@
 package klotski.model;
 
-import java.awt.Point;
-
 /**
  * a class that represents a single klotski piece
  * @author Joseph Petitti
  *
  */
 public class Piece {
-	// an array of points representing the center of each square of the piece
-	Point[] points;
+	int x; // the x coordinate of the top left corner of the piece
+	int y; // the y coordinate of the top left corner of the piece
+	int w; // the horizontal width of the piece
+	int h; // the vertical height of the piece
 	
 	/**
-	 * Basic constructor
-	 * @param points an array of points representing the center of each square
-	 * of the piece
+	 * Basic constructor for initializing a piece
+	 * @param x the x coordinate of the top left corner of the piece
+	 * @param y the y coordinate of the top left corner of the piece
+	 * @param w the horizontal width of the piece
+	 * @param h the vertical height of the piece
 	 */
-	public Piece(Point[] points) {
-		this.points = points;
+	public Piece(int x, int y, int w, int h) {
+		this.x = x;
+		this.y = y;
+		this.w = w;
+		this.h= h;
 	}
 
 	/**
@@ -26,23 +31,16 @@ public class Piece {
 	 * @param direction 0=up, 1=right, 2=down, 3=left
 	 */
 	public void move(int direction) {
-		int i;
-		
-		if (direction == 0) { // up
-			for (i = 0; i < points.length; ++i)
-				points[i].y--;
-		} else if (direction == 1) { // right
-			for (i = 0; i < points.length; ++i)
-				points[i].x++;
-		} else if (direction == 2) { // down
-			for (i = 0; i < points.length; ++i)
-				points[i].y++;
-		} else if (direction == 3) { // left
-			for (i = 0; i < points.length; ++i)
-				points[i].x--;
-		} else {
+		if (direction == 0) // up
+			this.y--;
+		else if (direction == 1) // right
+			this.x++;
+		else if (direction == 2) // down
+			this.y++;
+		else if (direction == 3) // left
+			this.x--;
+		else
 			throw new IllegalArgumentException("direction must be 0..3");
-		}
 	}
 	
 	/**
@@ -52,14 +50,8 @@ public class Piece {
 	 * @return true if this piece contains the given point, false otherwise
 	 */
 	public boolean containsPoint(int x, int y) {
-		int i;
-		
-		for (i = 0; i < points.length; ++i) {
-			if (points[i].x == x && points[i].y == y)
-				return true;
-		}
-		
-		return false;
+		return (x >= this.x && y >= this.y &&
+				x < (this.x + this.w) && y < (this.y + this.h));
 	}
 	
 	/**
@@ -68,28 +60,6 @@ public class Piece {
 	 * @return an int array with the left, top, width, and height values
 	 */
 	public int[] getDims() {
-		int i, top, left, bottom, right, height, width;
-		
-		left = this.points[0].x;
-		top = this.points[0].y;
-		bottom = top;
-		right = left;
-		
-		
-		for (i = 0; i < points.length; ++i) {
-			if (points[i].x < left)
-				left = points[i].x;
-			if (points[i].x > right)
-				right = points[i].x;
-			if (points[i].y < top)
-				top = points[i].y;
-			if (points[i].y > bottom)
-				bottom = points[i].y;
-		}
-		
-		height = bottom - top + 1;
-		width = right - left + 1;
-		
-		return new int[] {left, top, width, height};
+		return new int[] {this.x, this.y, this.w, this.h};
 	}
 }

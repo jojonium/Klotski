@@ -1,7 +1,5 @@
 package klotski.model;
 
-import java.awt.Point;
-
 /**
  * Represents the entire game board, containing several pieces
  * @author Joseph Petitti
@@ -9,7 +7,7 @@ import java.awt.Point;
  */
 public class Board {
 	Piece[] pieces;
-	Piece selectedPiece;
+	Piece selected;
 	int height;
 	int width;
 	int moves; // number of moves the player has made
@@ -40,7 +38,7 @@ public class Board {
 		this.width = 4;
 		this.moves = 0;
 		this.hasWon = false;
-		this.selectedPiece = null;
+		this.selected = null;
 	}
 	
 	/**
@@ -59,7 +57,7 @@ public class Board {
 	 * selectedPiece getter
 	 * @return this board's selectedPiece
 	 */
-	public Piece getSelectedPiece() { return selectedPiece; }
+	public Piece getSelectedPiece() { return selected; }
 	
 	/**
 	 * width getter
@@ -86,20 +84,16 @@ public class Board {
 	 * @return true if a piece was selected, false otherwise
 	 */
 	public boolean selectPiece(int x, int y) {
-		int i, j;
-		
-		for (i = 0; i < pieces.length; ++i) {
-			for (j = 0; j < pieces[i].points.length; ++j) {
-				if (pieces[i].points[j].x == x && pieces[i].points[j].y == y) {
-					selectedPiece = pieces[i];
-					return true;
-				}
+		for (Piece p : pieces) {
+			if (p.containsPoint(x, y)) {
+				selected = p;
+				return true;
 			}
 		}
 		
 		// if we get here then they clicked on an empty square, so deselect
 		// the piece
-		selectedPiece = null;
+		selected = null;
 		return false;
 	}
 	
@@ -110,13 +104,9 @@ public class Board {
 	 * @return true if the point is occupied
 	 */
 	public boolean isOccupied(int x, int y) {
-		int i, j;
-		
-		for (i = 0; i < pieces.length; ++i) {
-			for (j = 0; j < pieces[i].points.length; ++j) {
-				if (pieces[i].points[j].x == x && pieces[i].points[j].y == y) {
-					return true;
-				}
+		for (Piece p : pieces) {
+			if (p.containsPoint(x, y)) {
+				return true;
 			}
 		}
 		
@@ -129,73 +119,84 @@ public class Board {
 	 * @return true if the move was successful, false otherwise
 	 */
 	public boolean movePiece(int direction) {
-		int dx, dy, i, tempx, tempy;
+		int i;
 		
-		// if no selected piece just return false and exit
-		if (selectedPiece == null) {
+		// if there's no selected piece we can't move, so just return false
+		if (selected == null) {
 			return false;
 		}
 		
 		// check for a win
-		if (selectedPiece == pieces[0] && 
-				selectedPiece.getDims()[0] == 1 &&
-				selectedPiece.getDims()[1] == 3 &&
-				direction == 2) {
-				hasWon = true;
+		if (selected == pieces[0] && selected.x == 1 &&
+				selected.y == 3 && direction == 2) {
+			hasWon = true;
 			return true;
 		}
 		
-		// set dx and dy
-		switch (direction) {
-			case 0: dx = 0; dy = -1; break; // up
-			case 1: dx = 1; dy = 0; break;  // right
-			case 2: dx = 0; dy = 1; break;  // down
-			case 3: dx = -1; dy = 0; break; //left
-			default: dx = 0; dy = 0; throw new IllegalArgumentException(
-					"direction must be [0..3]");
-		}
-		
-		// check if the selectedPiece is able to move in the input direction
-		for (i = 0; i < selectedPiece.points.length; ++i) {
-			tempx = selectedPiece.points[i].x + dx;
-			tempy = selectedPiece.points[i].y + dy;
-			
-			// make sure we're not trying to go out of bounds...
-			if ((tempx >= width || tempx < 0 || tempy >= height || tempy < 0)
-					// ...or colliding with another piece
-					|| isOccupied(tempx, tempy) &&
-					!selectedPiece.containsPoint(tempx, tempy)) {
-				// move failed
-				return false;
+		if (direction == 0) {
+			// up
+			if (selected.y == 0) return false;
+			for (i = selected.x; i < selected.x + selected.w; ++i) {
+				if (isOccupied(i, selected.y - 1)) {
+					// there's a piece blocking this one
+					return false;
+				}
 			}
-					
+		} else if (direction == 1) {
+			// right
+			if (selected.x + selected.w == width) return false;
+			for (i = selected.y; i < selected.y + selected.h; ++i) {
+				if (isOccupied(selected.x + selected.w, i)) {
+					// there's a piece blocking this one
+					return false;
+				}
+			}
+		} else if (direction == 2) {
+			// down
+			if (selected.y + selected.h == height) return false;
+			for (i = selected.x; i < selected.x + selected.w; ++i) {
+				if (isOccupied(i, selected.y + selected.h)) {
+					// there's a piece blocking this one
+					return false;
+				}
+			}
+		} else if (direction == 3) {
+			// left
+			if (selected.x == 0) return false;
+			for (i = selected.y; i < selected.y + selected.h; ++i) {
+				if (isOccupied(selected.x - 1, i)) {
+					// there's a piece blocking this one
+					return false;
+				}
+			}
+		} else {
+			throw new IllegalArgumentException("direction must be 0..3");
 		}
 		
-		// if we've gotten here if means we're clear to move the piece
-		selectedPiece.move(direction);
+		// if we've gotten here it means we're clear to move the selected piece
+		selected.move(direction);
 		++moves;
 		return true;
 	}
-	
+
 	/*
 	 * Sets all pieces to their original position, sets moves to 0, sets
 	 * selectedPiece to null, and sets hasWon to false
 	 */
 	public void reset() {
-		pieces[0] = new Piece(new Point[] {new Point(1, 0), new Point(2, 0),
-				new Point(1, 1), new Point(2, 1)});
-		pieces[1] = new Piece(new Point[] {new Point(0, 0), new Point(0, 1)});
-		pieces[2] = new Piece(new Point[] {new Point(3, 0), new Point(3, 1)});
-		pieces[3] = new Piece(new Point[] {new Point(0, 2), new Point(0, 3)});
-		pieces[4] = new Piece(new Point[] {new Point(1, 2)});
-		pieces[5] = new Piece(new Point[] {new Point(2, 2)});
-		pieces[6] = new Piece(new Point[] {new Point(3, 2), new Point(3, 3)});
-		pieces[7] = new Piece(new Point[] {new Point(1, 3)});
-		pieces[8] = new Piece(new Point[] {new Point(2, 3)});
-		pieces[9] = new Piece(new Point[] {new Point(1, 4), new Point(2, 4)});
+		pieces[0] = new Piece(1, 0, 2, 2);
+		pieces[1] = new Piece(0, 0, 1, 2);
+		pieces[2] = new Piece(3, 0, 1, 2);
+		pieces[3] = new Piece(0, 2, 1, 2);
+		pieces[4] = new Piece(1, 2, 1, 1);
+		pieces[5] = new Piece(2, 2, 1, 1);
+		pieces[6] = new Piece(3, 2, 1, 2);
+		pieces[7] = new Piece(1, 3, 1, 1);
+		pieces[8] = new Piece(2, 3, 1, 1);
+		pieces[9] = new Piece(1, 4, 2, 1);
 		
 		moves = 0;
-		selectedPiece = null;
+		selected = null;
 		hasWon = false;
 	}
 }

@@ -2,8 +2,6 @@ package klotski.model;
 
 import static org.junit.Assert.*;
 
-import java.awt.Point;
-
 import org.junit.Test;
 
 public class TestBoard {
@@ -18,8 +16,7 @@ public class TestBoard {
 		assertEquals(5, testBoard.getHeight());
 		assertEquals(10, testBoard.getPieces().length);
 		
-		Piece winningPiece = new Piece(new Point[] {new Point(1, 3),
-				new Point(2, 3), new Point(1, 4), new Point(2, 4)});
+		Piece winningPiece = new Piece(1, 3, 2, 2);
 		Board winBoard = new Board(new Piece[] {winningPiece});
 		assertEquals(0, winBoard.getMoves());
 		assertNull(winBoard.getSelectedPiece());
@@ -34,8 +31,7 @@ public class TestBoard {
 		Board testBoard = new Board();
 		assertFalse(testBoard.checkWin());
 		
-		Piece winningPiece = new Piece(new Point[] {new Point(1, 3),
-				new Point(2, 3), new Point(1, 4), new Point(2, 4)});
+		Piece winningPiece = new Piece(1, 3, 2, 2);
 		Board winBoard = new Board(new Piece[] {winningPiece});
 		winBoard.selectPiece(2, 3);
 		winBoard.movePiece(0);
@@ -47,8 +43,7 @@ public class TestBoard {
 
 	@Test
 	public void testGetMoves() {
-		Piece winningPiece = new Piece(new Point[] {new Point(1, 3),
-				new Point(2, 3), new Point(1, 4), new Point(2, 4)});
+		Piece winningPiece = new Piece(1, 3, 2, 2);
 		Board winBoard = new Board(new Piece[] {winningPiece});
 		winBoard.selectPiece(2, 3);
 		assertEquals(0, winBoard.getMoves());
@@ -73,8 +68,7 @@ public class TestBoard {
 	public void testGetWidth() {
 		Board testBoard = new Board();
 		assertEquals(4, testBoard.getWidth());
-		Piece winningPiece = new Piece(new Point[] {new Point(1, 3),
-				new Point(2, 3), new Point(1, 4), new Point(2, 4)});
+		Piece winningPiece = new Piece(1, 3, 2, 2);
 		Board winBoard = new Board(new Piece[] {winningPiece});
 		assertEquals(4, winBoard.getWidth());
 	}
@@ -83,8 +77,7 @@ public class TestBoard {
 	public void testGetHeight() {
 		Board testBoard = new Board();
 		assertEquals(5, testBoard.getHeight());
-		Piece winningPiece = new Piece(new Point[] {new Point(1, 3),
-				new Point(2, 3), new Point(1, 4), new Point(2, 4)});
+		Piece winningPiece = new Piece(1, 3, 2, 2);
 		Board winBoard = new Board(new Piece[] {winningPiece});
 		assertEquals(5, winBoard.getHeight());
 	}
@@ -113,8 +106,7 @@ public class TestBoard {
 
 	@Test
 	public void testMovePiece() {
-		Piece singlePiece = new Piece(new Point[] {new Point(1, 2),
-				new Point(2, 2), new Point(1, 3), new Point(2, 3)});
+		Piece singlePiece = new Piece(1, 2, 2, 2);
 		Board testBoard = new Board(new Piece[] {singlePiece});
 		assertFalse(testBoard.movePiece(1)); // no piece selected
 		testBoard.selectPiece(2, 2);
@@ -131,8 +123,7 @@ public class TestBoard {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testMovePieceException() {
-		Piece singlePiece = new Piece(new Point[] {new Point(1, 2),
-				new Point(2, 2), new Point(1, 3), new Point(2, 3)});
+		Piece singlePiece = new Piece(1, 2, 2, 2);
 		Board testBoard = new Board(new Piece[] {singlePiece});
 		testBoard.selectPiece(2, 2);
 		testBoard.movePiece(4); // this should fail
