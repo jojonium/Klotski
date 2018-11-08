@@ -80,16 +80,22 @@ public class KlotskiApp extends JFrame {
 					// mouse dragged
 					if (Math.abs(dx) > Math.abs(dy)) {
 						// horizontal drag
-						if (dx > 0)
-							new MovePieceController(KlotskiApp.this, board).move(1);
-						else
-							new MovePieceController(KlotskiApp.this, board).move(3);
+						if (dx > 0) {
+							new MovePieceController(KlotskiApp.this, board)
+							.move(1);
+						} else {
+							new MovePieceController(KlotskiApp.this, board)
+							.move(3);
+						}
 					} else {
 						// vertical drag
-						if (dy > 0)
-							new MovePieceController(KlotskiApp.this, board).move(2);
-						else
-							new MovePieceController(KlotskiApp.this, board).move(0);
+						if (dy > 0) {
+							new MovePieceController(KlotskiApp.this, board)
+							.move(2);
+						} else {
+							new MovePieceController(KlotskiApp.this, board)
+							.move(0);
+						}
 					}
 				}
 			}
