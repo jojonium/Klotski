@@ -74,7 +74,7 @@ public class Piece {
 		out = out.concat(Integer.toString(x) + " ")
 				.concat(Integer.toString(y) + " ")
 				.concat(Integer.toString(w) + " ")
-				.concat(Integer.toString(h) + " ");
+				.concat(Integer.toString(h));
 		return out;
 	}
 }
