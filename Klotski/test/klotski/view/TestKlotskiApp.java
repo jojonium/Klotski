@@ -39,11 +39,6 @@ public class TestKlotskiApp {
 				System.currentTimeMillis(), 0, KeyEvent.VK_LEFT,'Z');
 		KeyEvent keyRight = new KeyEvent(app, KeyEvent.KEY_PRESSED,
 				System.currentTimeMillis(), 0, KeyEvent.VK_RIGHT,'Z');
-		KeyEvent keyR = new KeyEvent(app, KeyEvent.KEY_PRESSED,
-				System.currentTimeMillis(), 0, KeyEvent.VK_R,'r');
-		@SuppressWarnings("unused")
-		KeyEvent keyQ = new KeyEvent(app, KeyEvent.KEY_PRESSED,
-				System.currentTimeMillis(), 0, KeyEvent.VK_Q,'q');
 
 		b.selectPiece(1, 4);
 
@@ -51,9 +46,6 @@ public class TestKlotskiApp {
 	    app.getKeyListeners()[0].keyPressed(keyDown);
 	    app.getKeyListeners()[0].keyPressed(keyLeft);
 	    app.getKeyListeners()[0].keyPressed(keyRight);
-	    app.getKeyListeners()[0].keyPressed(keyR);
-	    // commented out because it requires user input to click "yes"
-	    //app.getKeyListeners()[0].keyPressed(keyQ);
 	}
 
 }
