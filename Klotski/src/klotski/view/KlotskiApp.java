@@ -32,6 +32,7 @@ import klotski.controller.QuitController;
 import klotski.controller.ResetPuzzleController;
 import klotski.controller.SaveController;
 import klotski.controller.SelectPieceController;
+import klotski.controller.SetConfigController;
 
 public class KlotskiApp extends JFrame {
 	Board board;	
@@ -111,18 +112,6 @@ public class KlotskiApp extends JFrame {
 			}
 		});
 		
-		JMenuItem mntmReset = new JMenuItem("Reset");
-		mntmReset.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R,
-				InputEvent.CTRL_MASK));
-		mnKlotski.add(mntmReset);
-		
-		mntmReset.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new ResetPuzzleController(KlotskiApp.this, board).reset();
-			}
-		});
-		
 		JMenuItem mntmQuit = new JMenuItem("Quit");
 		mntmQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, 
 				InputEvent.CTRL_MASK));
@@ -137,6 +126,74 @@ public class KlotskiApp extends JFrame {
 			}
 		});
 
+		
+		/*****************\
+		 *   Puzzle Menu   *
+		\*****************/
+		
+		JMenu mnPuzzle = new JMenu("Puzzle");
+		menuBar.add(mnPuzzle);
+		
+		JMenuItem mntmReset = new JMenuItem("Reset");
+		mntmReset.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R,
+				InputEvent.CTRL_MASK));
+		mnPuzzle.add(mntmReset);
+		
+		mntmReset.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new ResetPuzzleController(KlotskiApp.this, board).reset();
+			}
+		});
+		
+		JMenuItem mntmConfig1 = new JMenuItem("Configuration 1");
+		mntmConfig1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1,
+				InputEvent.CTRL_MASK));
+		mnPuzzle.add(mntmConfig1);
+		
+		mntmConfig1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new SetConfigController(KlotskiApp.this, board).setConfig(1);
+			}
+		});
+		
+		JMenuItem mntmConfig2 = new JMenuItem("Configuration 2");
+		mntmConfig2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2,
+				InputEvent.CTRL_MASK));
+		mnPuzzle.add(mntmConfig2);
+		
+		mntmConfig2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new SetConfigController(KlotskiApp.this, board).setConfig(2);
+			}
+		});
+		
+		JMenuItem mntmConfig3 = new JMenuItem("Configuration 3");
+		mntmConfig3.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3,
+				InputEvent.CTRL_MASK));
+		mnPuzzle.add(mntmConfig3);
+		
+		mntmConfig3.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new SetConfigController(KlotskiApp.this, board).setConfig(3);
+			}
+		});
+		
+		JMenuItem mntmConfig4 = new JMenuItem("Configuration 4");
+		mntmConfig4.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_4,
+				InputEvent.CTRL_MASK));
+		mnPuzzle.add(mntmConfig4);
+		
+		mntmConfig4.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new SetConfigController(KlotskiApp.this, board).setConfig(4);
+			}
+		});
+		
 		
 		/*****************\
 		 *   Help Menu   *
