@@ -37,6 +37,7 @@ public class KlotskiApp extends JFrame {
 	Board board;	
 	PuzzleView puzzleView;
 	JLabel movesCounter;
+	JButton btnReset;
 	Point storedPoint;
 	
 	//Necessary to suppress an Eclipse warning
@@ -47,6 +48,7 @@ public class KlotskiApp extends JFrame {
 	/** return actionable elements */
 	public JLabel getMovesCounter() { return movesCounter; }
 	public PuzzleView getPuzzleView() { return puzzleView; }
+	public JButton getResetButton() { return btnReset; }
 
 	/**
 	 * Create the frame.
@@ -167,9 +169,7 @@ public class KlotskiApp extends JFrame {
 
 		
 		
-		/*******************\
-		 *   Puzzle View   *
-		\*******************/
+	
 		
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -179,6 +179,12 @@ public class KlotskiApp extends JFrame {
 				}
 			}
 		});
+		
+		
+		
+		/*******************\
+		 *   Puzzle View   *
+		\*******************/
 		
 		puzzleView = new PuzzleView(board);
 		puzzleView.addMouseListener(new MouseAdapter() {
@@ -253,7 +259,7 @@ public class KlotskiApp extends JFrame {
 				puzzleView.getPreferredSize().height);
 		contentPane.add(puzzleView);
 		
-		JButton btnReset = new JButton("Reset");
+		btnReset = new JButton("Reset");
 		btnReset.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
