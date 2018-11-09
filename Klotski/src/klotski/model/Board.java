@@ -13,6 +13,7 @@ public class Board {
 	int height;
 	int width;
 	int moves; // number of moves the player has made
+	int configuration;
 	boolean hasWon;
 	
 	/**
@@ -21,6 +22,7 @@ public class Board {
 	 */
 	public Board() {
 		this.pieces = new Piece[10];
+		this.configuration = 1;
 		
 		// initialize all pieces to configuration 1, set moves to 0, set
 		// selectedPiece to null, and set hasWon to false
@@ -39,8 +41,17 @@ public class Board {
 		this.height = 5;
 		this.width = 4;
 		this.moves = 0;
+		this.configuration = 1;
 		this.hasWon = false;
 		this.selected = null;
+	}
+	
+	/**
+	 * Sets configuration to the given number
+	 * @param number input to set configuration to
+	 */
+	public void setConfig(int number) {
+		this.configuration = number;
 	}
 	
 	/**
@@ -207,20 +218,55 @@ public class Board {
 	}
 
 	/*
-	 * Sets all pieces to their original position, sets moves to 0, sets
-	 * selectedPiece to null, and sets hasWon to false
+	 * Sets all pieces to their original position for the current configuration,
+	 * sets moves to 0, sets selectedPiece to null, and sets hasWon to false
 	 */
 	public void reset() {
-		pieces[0] = new Piece(1, 0, 2, 2);
-		pieces[1] = new Piece(0, 0, 1, 2);
-		pieces[2] = new Piece(3, 0, 1, 2);
-		pieces[3] = new Piece(0, 2, 1, 2);
-		pieces[4] = new Piece(1, 2, 1, 1);
-		pieces[5] = new Piece(2, 2, 1, 1);
-		pieces[6] = new Piece(3, 2, 1, 2);
-		pieces[7] = new Piece(1, 3, 1, 1);
-		pieces[8] = new Piece(2, 3, 1, 1);
-		pieces[9] = new Piece(1, 4, 2, 1);
+		if (configuration == 1) {
+			pieces[0] = new Piece(1, 0, 2, 2);
+			pieces[1] = new Piece(0, 0, 1, 2);
+			pieces[2] = new Piece(3, 0, 1, 2);
+			pieces[3] = new Piece(0, 2, 1, 2);
+			pieces[4] = new Piece(1, 2, 1, 1);
+			pieces[5] = new Piece(2, 2, 1, 1);
+			pieces[6] = new Piece(3, 2, 1, 2);
+			pieces[7] = new Piece(1, 3, 1, 1);
+			pieces[8] = new Piece(2, 3, 1, 1);
+			pieces[9] = new Piece(1, 4, 2, 1);
+		} else if (configuration == 2) {
+			pieces[0] = new Piece(1, 0, 2, 2);
+			pieces[1] = new Piece(0, 0, 1, 1);
+			pieces[2] = new Piece(3, 0, 1, 1);
+			pieces[3] = new Piece(0, 1, 1, 2);
+			pieces[4] = new Piece(3, 1, 1, 2);
+			pieces[5] = new Piece(1, 2, 1, 2);
+			pieces[6] = new Piece(0, 3, 1, 1);
+			pieces[7] = new Piece(3, 3, 1, 1);
+			pieces[8] = new Piece(0, 4, 2, 1);
+			pieces[9] = new Piece(2, 4, 2, 1);
+		} else if (configuration == 3) {
+			pieces[0] = new Piece(2, 1, 2, 2);
+			pieces[1] = new Piece(0, 0, 1, 2);
+			pieces[2] = new Piece(1, 0, 1, 1);
+			pieces[3] = new Piece(2, 0, 1, 1);
+			pieces[4] = new Piece(3, 0, 1, 1);
+			pieces[5] = new Piece(1, 1, 1, 2);
+			pieces[6] = new Piece(0, 2, 1, 2);
+			pieces[7] = new Piece(1, 3, 2, 1);
+			pieces[8] = new Piece(3, 3, 1, 1);
+			pieces[9] = new Piece(2, 4, 2, 1);
+		} else if (configuration == 4) {
+			pieces[0] = new Piece(1, 0, 2, 2);
+			pieces[1] = new Piece(0, 0, 1, 2);
+			pieces[2] = new Piece(3, 0, 1, 2);
+			pieces[3] = new Piece(0, 2, 1, 2);
+			pieces[4] = new Piece(1, 2, 2, 1);
+			pieces[5] = new Piece(3, 2, 1, 2);
+			pieces[6] = new Piece(1, 3, 1, 1);
+			pieces[7] = new Piece(2, 3, 1, 1);
+			pieces[8] = new Piece(0, 4, 1, 1);
+			pieces[9] = new Piece(3, 4, 1, 1);
+		}
 		
 		moves = 0;
 		selected = null;
