@@ -2,6 +2,9 @@ package klotski.model;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 public class TestBoard {
@@ -119,6 +122,15 @@ public class TestBoard {
 		assertTrue(testBoard.movePiece(2));
 		assertTrue(testBoard.checkWin());
 		
+		testBoard = new Board();
+		testBoard.selectPiece(1, 2);
+		assertFalse(testBoard.movePiece(0));
+		assertFalse(testBoard.movePiece(1));
+		assertFalse(testBoard.movePiece(2));
+		assertFalse(testBoard.movePiece(3));
+		
+		testBoard.selectPiece(0, 0);
+		assertFalse(testBoard.movePiece(0));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -140,7 +152,55 @@ public class TestBoard {
 		testBoard.reset();
 		assertFalse(testBoard.isOccupied(0, 4));
 		assertEquals(0, testBoard.getMoves());
-
+	}
+	
+	@Test
+	public void testSetPieces() {
+		List<String> pieceLines = new ArrayList<String>();
+		pieceLines.add("3");
+		pieceLines.add(new Piece(1, 1, 1, 1).toString());
+		pieceLines.add(new Piece(2, 2, 1, 1).toString());
+		Board b = new Board();
+		b.setPieces(pieceLines);
+		assertEquals(2, b.getPieces().length);
+		assertEquals(3, b.getMoves());
+	}
+	
+	@Test (expected = IllegalArgumentException.class)
+	public void testSetPiecesExceptionTooLong() {
+		List<String> tooLong = new ArrayList<String>();
+		for (int i = 0; i < 100; ++i) {
+			tooLong.add(new Piece(1, 1, 1, 1).toString());
+		}
+		Board b = new Board();
+		b.setPieces(tooLong);
+		
+		List<String> tooShort = new ArrayList<String>();
+		b.setPieces(tooShort);
+	}
+	
+	@Test (expected = IllegalArgumentException.class)
+	public void testSetPiecesExceptionTooShort() {
+		Board b = new Board();
+		List<String> tooShort = new ArrayList<String>();
+		b.setPieces(tooShort);
+	}
+	
+	@Test
+	public void toStringTest() {
+		Board b = new Board();
+		String testString = "0\n" +
+				"1 0 2 2\n" + 
+				"0 0 1 2\n" + 
+				"3 0 1 2\n" + 
+				"0 2 1 2\n" + 
+				"1 2 1 1\n" + 
+				"2 2 1 1\n" + 
+				"3 2 1 2\n" + 
+				"1 3 1 1\n" + 
+				"2 3 1 1\n" + 
+				"1 4 2 1\n";
+		assertEquals(testString, b.toString());
 	}
 
 }

@@ -54,7 +54,6 @@ public class Board {
 		int i;
 		String[] tokens;
 		if (lines.size() < 1 || lines.size() > this.width * this.height) {
-			System.out.println(lines.size());
 			throw new IllegalArgumentException("Illegal list of lines");
 		}
 		this.moves = Integer.parseInt(lines.get(0).trim());
