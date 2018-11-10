@@ -152,6 +152,21 @@ public class TestBoard {
 		testBoard.reset();
 		assertFalse(testBoard.isOccupied(0, 4));
 		assertEquals(0, testBoard.getMoves());
+		
+		testBoard.setConfig(2);
+		testBoard.reset();
+		assertFalse(testBoard.isOccupied(2, 2));
+		assertFalse(testBoard.isOccupied(2, 3));
+		
+		testBoard.setConfig(3);
+		testBoard.reset();
+		assertFalse(testBoard.isOccupied(0, 5));
+		assertFalse(testBoard.isOccupied(1, 5));
+		
+		testBoard.setConfig(4);
+		testBoard.reset();
+		assertFalse(testBoard.isOccupied(1, 4));
+		assertFalse(testBoard.isOccupied(2, 4));
 	}
 	
 	@Test
