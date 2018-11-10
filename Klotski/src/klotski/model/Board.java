@@ -222,6 +222,7 @@ public class Board {
 	 * sets moves to 0, sets selectedPiece to null, and sets hasWon to false
 	 */
 	public void reset() {
+		pieces = new Piece[10];
 		if (configuration == 1) {
 			pieces[0] = new Piece(1, 0, 2, 2);
 			pieces[1] = new Piece(0, 0, 1, 2);
