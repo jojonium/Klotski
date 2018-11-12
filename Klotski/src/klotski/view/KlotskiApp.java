@@ -226,7 +226,9 @@ public class KlotskiApp extends JFrame {
 
 		
 		
-	
+		/********************\
+		 *   Close Window   *
+		\********************/
 		
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -282,6 +284,15 @@ public class KlotskiApp extends JFrame {
 				}
 			}
 		});
+		puzzleView.setBounds(12, 12, puzzleView.getPreferredSize().width,
+				puzzleView.getPreferredSize().height);
+		contentPane.add(puzzleView);
+		
+		
+		/*************************\
+		 *   Keyboard Listener   *
+		\*************************/
+		
 		this.addKeyListener(new KeyListener() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -312,10 +323,13 @@ public class KlotskiApp extends JFrame {
 			public void keyTyped(KeyEvent e) {}
 			
 		});
-		puzzleView.setBounds(12, 12, puzzleView.getPreferredSize().width,
-				puzzleView.getPreferredSize().height);
-		contentPane.add(puzzleView);
 		
+		
+		
+		/*******************\
+		 *   GUI BUttons   *
+		\*******************/
+
 		btnReset = new JButton("Reset");
 		btnReset.addActionListener(new ActionListener() {
 			@Override
@@ -384,6 +398,12 @@ public class KlotskiApp extends JFrame {
 		btnDown.setBounds(525, 250, 50, 25);
 		contentPane.add(btnDown);
 		
+		
+		
+		/******************\
+		 *   GUI Labels   *
+		\******************/
+
 		JLabel lblMoves = new JLabel("Moves:");
 		lblMoves.setBounds(475, 112, 66, 15);
 		contentPane.add(lblMoves);
