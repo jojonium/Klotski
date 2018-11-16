@@ -47,6 +47,14 @@ public class Board {
 	}
 	
 	/**
+	 * Sets the selectedPiece to be the piece at index i
+	 * @param i the index of the piece you want to select in this board's pieces
+	 */
+	public void setSelected(int i) {
+		selected = pieces[i];
+	}
+	
+	/**
 	 * Sets configuration to the given number
 	 * @param number input to set configuration to
 	 */

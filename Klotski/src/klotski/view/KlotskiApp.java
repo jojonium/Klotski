@@ -33,6 +33,7 @@ import klotski.controller.ResetPuzzleController;
 import klotski.controller.SaveController;
 import klotski.controller.SelectPieceController;
 import klotski.controller.SetConfigController;
+import klotski.controller.SolvePuzzleController;
 
 public class KlotskiApp extends JFrame {
 	Board board;	
@@ -145,6 +146,18 @@ public class KlotskiApp extends JFrame {
 				new ResetPuzzleController(KlotskiApp.this, board).reset();
 			}
 		});
+		
+		JMenuItem mntmSolve = new JMenuItem("Solve");
+		mntmSolve.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Y, 
+				InputEvent.CTRL_MASK));
+		mnPuzzle.add(mntmSolve);
+		
+		mntmSolve.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				new SolvePuzzleController(KlotskiApp.this, board).solve();
+			}
+		});		
 		
 		JMenuItem mntmConfig1 = new JMenuItem("Configuration 1");
 		mntmConfig1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1,
